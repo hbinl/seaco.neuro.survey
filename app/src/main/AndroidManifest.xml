@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.seaco.seaconeuropsych" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.seaco.seaconeuropsych.Intro"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.prospective_initial"
+            android:label="@string/title_activity_prospective_initial" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.prospective_end"
+            android:label="@string/title_activity_prospective_end" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.prospective_result"
+            android:label="@string/title_activity_prospective_result" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.pair_level1"
+            android:label="@string/title_activity_pair_level1" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.pair_level2"
+            android:label="@string/title_activity_pair_level2" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.fluid_main"
+            android:label="@string/title_activity_fluid_main" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.reaction_main"
+            android:label="@string/title_activity_reaction_main" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.NumericStart"
+            android:label="@string/title_activity_numeric_start" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.NumericMainActivity"
+            android:label="@string/title_activity_numeric_main" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.NumericMainInput"
+            android:label="@string/title_activity_numeric_main_input" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.NumericEndReport"
+            android:label="@string/title_activity_numeric_end_report" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.EndBranch"
+            android:label="@string/title_activity_end_branch" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.EndActivity"
+            android:label="@string/title_activity_end" >
+        </activity>
+        <activity
+            android:name="com.seaco.seaconeuropsych.Lights_main"
+            android:label="@string/title_activity_lights_main" >
+        </activity>
+    </application>
+
+</manifest>

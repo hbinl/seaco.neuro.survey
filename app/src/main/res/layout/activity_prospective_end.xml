@@ -1,0 +1,95 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:label="X"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    >
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/image_layout"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageView_1"
+                android:layout_gravity="top|center"
+
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageView_2"
+                android:layout_gravity="top|center"
+
+                android:scaleType="fitXY"
+                android:layout_toRightOf="@+id/imageView_1"/>
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageView_3"
+                android:layout_gravity="top|center"
+
+                android:scaleType="fitXY"
+                android:layout_toRightOf="@+id/imageView_2"/>
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/imageView_4"
+                android:layout_gravity="top|center"
+
+                android:scaleType="fitXY"
+                android:layout_toRightOf="@+id/imageView_3"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:text="@string/prospective_end_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff000000"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_below="@+id/image_layout"
+            android:id = "@+id/prospective_end_text"
+            android:textSize="20sp" />
+
+
+        <Button android:id="@+id/next_button"
+            android:layout_marginTop="20dp"
+            android:layout_width="400dp"
+            android:layout_height="70dp"
+            android:text="@string/next_button"
+            android:gravity="center|center_horizontal|fill_vertical"
+            android:layout_gravity="center"
+            android:layout_below="@+id/prospective_end_text"
+            android:layout_centerHorizontal="true"
+            android:onClick="endActivity"
+
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+    <Button android:id="@+id/skip_button"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+
+        android:layout_gravity="right|top"
+        android:text="@string/prospective_end_skip_text"
+        android:onClick="skipActivity"
+        android:textSize="15sp" />
+
+
+</FrameLayout>
