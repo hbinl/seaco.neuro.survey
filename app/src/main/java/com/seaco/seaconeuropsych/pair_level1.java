@@ -1,5 +1,8 @@
 package com.seaco.seaconeuropsych;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 import android.content.Intent;
@@ -7,10 +10,14 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class pair_level1 extends Activity {
     public String tag = "gme";
@@ -32,7 +39,7 @@ public class pair_level1 extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pair_level1);
         for (int i=1;i<=6;i++){
             if (i>3){
                 values[i]=i-3;
@@ -43,7 +50,7 @@ public class pair_level1 extends Activity {
         }
         shufflearray(values);
 
-        Log.d(tag,"values1: "+values[1]+" values 5: "+values[5]);
+        Log.d(tag, "values1: " + values[1] + " values 5: " + values[5]);
 
         b[1]=(ImageButton)findViewById(R.id.imageButton1);
         b[2]=(ImageButton) findViewById(R.id.imageButton2);
@@ -65,7 +72,7 @@ public class pair_level1 extends Activity {
             public void onClick(View v) {
                 Log.d(tag, "Inside Onclick of the Next Button");
 
-                Intent intent = new Intent(MainActivity.this, Level2.class);
+                Intent intent = new Intent(pair_level1.this, pair_level2.class);
                 startActivity(intent);
                 Log.d(tag, "Finished calling the intent - now finish() going to run");
                 finish();
@@ -111,7 +118,7 @@ public class pair_level1 extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_pair_level1, menu);
         return true;
     }
     public void generateNoteOnSD(String sFileName, String sBody){
