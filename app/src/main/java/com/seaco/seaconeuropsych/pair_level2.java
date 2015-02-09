@@ -2,6 +2,7 @@ package com.seaco.seaconeuropsych;
 
 import java.util.Random;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class pair_level2 extends pair_level1 {
+public class pair_level2 extends Activity {
     public String tag = "gme";
     public int activecounter=0;							//counts the number of active cards
     public int cardsactive[]=new int[2];
@@ -27,7 +28,7 @@ public class pair_level2 extends pair_level1 {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_pair_level2);
-       
+        Log.d(tag, "value casekoushalpetitcon 2: ");
 
         for (int i=1;i<=12;i++){
             if (i>6){
@@ -170,7 +171,11 @@ public class pair_level2 extends pair_level1 {
                             b[cardsactive[0]].setBackgroundResource(R.drawable.button);
                             b[cardsactive[1]].setBackgroundResource(R.drawable.button);
                             wrong=+1;
+                            for (int j=1;j<=12;j++){
 
+                                b[j].setClickable(true);
+
+                            }
                         }
 
 
@@ -185,24 +190,25 @@ public class pair_level2 extends pair_level1 {
 
                 }
                 else {
-                    correct=correct+1;
-                }
-                for (int j=1;j<=12;j++){
+                    correct = correct + 1;
 
-                    b[j].setClickable(true);
-
-                }
-                value1=0;
-                value2=0;
-                activecounter=0;
-            }
-            if (correct==6){
-                end.setVisibility(View.VISIBLE);
-                for (int j=1;j<=12;j++){
-                    if (j!=cardsactive[0] || j!=cardsactive[1]){
-                        b[j].setClickable(true);
+                    for (int j = 1; j <= 12; j++) {
+                        if (j != cardsactive[0] || j != cardsactive[1]) {
+                            b[j].setClickable(true);
+                        }
                     }
                 }
+                
+                activecounter=0;
+            }
+            /*for (int j=1;j<=12;j++){
+                if (j!=cardsactive[0] || j!=cardsactive[1]){
+                    b[j].setClickable(true);
+                }
+            }*/
+            if (correct==6){
+                end.setVisibility(View.VISIBLE);
+
             }
 
         }
