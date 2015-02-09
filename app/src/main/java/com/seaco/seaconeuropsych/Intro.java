@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class Intro extends ActionBarActivity {
     final Context context = this;
@@ -18,6 +20,11 @@ public class Intro extends ActionBarActivity {
 
     }
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,5 +54,9 @@ public class Intro extends ActionBarActivity {
 
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }

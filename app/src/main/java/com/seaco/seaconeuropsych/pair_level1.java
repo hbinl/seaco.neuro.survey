@@ -264,4 +264,8 @@ public class pair_level1 extends Activity {
         a[change] = helper;
     }
 
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
+
 }

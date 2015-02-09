@@ -7,12 +7,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 
 
 public class prospective_end extends Activity {
@@ -255,6 +265,52 @@ public class prospective_end extends Activity {
                 // if answer is correct or skipped, proceed to next activity
                 if (proceed) {
                     // passing data for reports
+
+                    final String xmlFile = "userData";
+                    String userName = "username";
+                    String password = "password";
+                    try {
+                        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "X" + "/", "userData.xml");
+                        FileOutputStream fileos = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "X" + "/" + "userData.xml");
+                        System.out.println("S");
+                        //FileOutputStream fileos= getApplicationContext().openFileOutput(xmlFile, Context.MODE_PRIVATE);
+                        XmlSerializer xmlSerializer = Xml.newSerializer();
+                        StringWriter writer = new StringWriter();
+                        xmlSerializer.setOutput(writer);
+                        xmlSerializer.startDocument("UTF-8", true);
+                        xmlSerializer.startTag(null, "userData");
+                        xmlSerializer.startTag(null, "userName");
+                        xmlSerializer.text("x");
+                        xmlSerializer.endTag(null, "userName");
+                        xmlSerializer.startTag(null,"password");
+                        xmlSerializer.text("s");
+                        xmlSerializer.endTag(null, "password");
+                        xmlSerializer.endTag(null, "userData");
+                        xmlSerializer.endDocument();
+                        xmlSerializer.flush();
+                        String dataWrite = writer.toString();
+                        fileos.write(dataWrite.getBytes());
+                        fileos.close();
+
+                    }
+                    catch (FileNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    catch (IllegalArgumentException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    catch (IllegalStateException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                    catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+
                     Intent intent = new Intent(context, prospective_result.class);
                     intent.putExtra("1_Prospective_Actual_Answer", actual_answer);
                     intent.putExtra("1_Prospective_Final_Answer", prospective_end.id);
@@ -264,6 +320,7 @@ public class prospective_end extends Activity {
                     intent.putExtra("1_Prospective_Initial_Until_Final_Duration", duration);
                     intent.putExtra("1_Prospective_End_Screen_Visible_Duration", visible_duration);
                     startActivity(intent);
+                    finish();
                 }
 
             }
@@ -271,5 +328,9 @@ public class prospective_end extends Activity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }

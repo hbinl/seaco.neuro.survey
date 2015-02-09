@@ -126,9 +126,11 @@ public class NumericMainActivity extends ActionBarActivity {
         intent.putExtra("numberOfDigits", round_no+1);
         intent.putExtra("numCorrectSoFar", num_correct_so_far);
         intent.putExtra("numErrors", num_errors);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivity(intent);
-
+        finish();
+        overridePendingTransition(0, 0);
 
     }
 
@@ -152,5 +154,9 @@ public class NumericMainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }

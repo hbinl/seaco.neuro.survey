@@ -324,4 +324,8 @@ public class reaction_main extends ActionBarActivity {
         startActivity(intent);
 
     }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
 }

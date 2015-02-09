@@ -61,4 +61,8 @@ public class EndBranch extends ActionBarActivity {
         startActivity(intent);
 
     }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
 }

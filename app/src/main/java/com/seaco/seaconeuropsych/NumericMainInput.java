@@ -107,7 +107,10 @@ public class NumericMainInput extends ActionBarActivity {
         intent.putExtra("roundNo",round_no+1);
         intent.putExtra("numCorrectSoFar",num_correct_so_far);
         intent.putExtra("numErrors",num_errors);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     public void endRounds() {
@@ -119,7 +122,10 @@ public class NumericMainInput extends ActionBarActivity {
         intent.putExtra("numCorrectSoFar",num_correct_so_far);
         intent.putExtra("numErrors",num_errors);
         intent.putExtra("skipped", skipped);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     public void numericSkip(View view) {
@@ -168,5 +174,9 @@ public class NumericMainInput extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }

@@ -256,4 +256,8 @@ public class pair_level2 extends pair_level1 {
 
     }
 
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
+
 }

@@ -4,6 +4,7 @@ package com.seaco.seaconeuropsych;
 //here again
 //lol
 //haobin'sfsdjhfkhkfhfakhfkahfkljalhflahdkfldjkfjkdj
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class prospective_initial extends ActionBarActivity {
@@ -105,6 +108,16 @@ public class prospective_initial extends ActionBarActivity {
 
         intent.putExtra("Answer", shape);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }
-//HAHA
+
