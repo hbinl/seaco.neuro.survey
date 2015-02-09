@@ -267,17 +267,11 @@ public class pair_level1 extends Activity {
 
         }
     }
-<<<<<<< HEAD
-    private void swap(int[] a, int i, int change) {
-        int helper = a[i];
-        a[i] = a[change];
-        a[change] = helper;
-    }
+
 
     @Override
     public void onBackPressed() { // Disable hardware back button
     }
 
-=======
->>>>>>> 197c26baae3bacdf36e3f4279b182ffc7b641ad7
+
 }
