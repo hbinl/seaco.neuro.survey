@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SEACO_Neuropsych.iml" filepath="$PROJECT_DIR$/SEACO_Neuropsych.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seaco.iml" filepath="$PROJECT_DIR$/seaco.iml" />
     </modules>
   </component>
 </project>

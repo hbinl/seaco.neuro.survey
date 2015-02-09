@@ -1,5 +1,8 @@
 package com.seaco.seaconeuropsych;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 import android.content.Intent;
@@ -7,62 +10,56 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class pair_level1 extends Activity {
-    int first =0;
-    public int activecounter=0;							//counts the number of active car
-    public Button b[]= new Button[7];
+    public String tag = "gme";
+    public int activecounter=0;							//counts the number of active cards
+    public int cardsactive[]=new int[2];
+    public ImageButton b[]= new ImageButton[7];
     public int values[] = new int[7];   			//Stores the random numbers
+    int first =0;
+    int correct=0;
+    int wrong=0;
     int display=-1;							//button currently activeious button
     int prev=-1;								// keep tract of prev
     int clicked=-1;
     int solved=0;							//keep tract of the total number of pairs obtained so far
-    public int but_val [] = new int[7];           //List of values for each button
     int odd=0;
+    long timestart;
+    long timefinish;
     Button next;
-
-    protected void onSaveInstanceState(Bundle outState)
-    {
-        //Save all the values required for the game
-        //Save the button states and any information displayed
-        super.onSaveInstanceState(outState);
-
-
-        outState.putInt("previous", prev);
-        outState.putInt("clicked1", activecounter);
-        outState.putInt("solv", solved);
-        outState.putInt("count_val", activecounter);
-        outState.putInt("disp", display);
-        outState.putIntArray("array", but_val);
-
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_level1);
-        b[1]=(Button) findViewById(R.id.button1);
-        b[2]=(Button) findViewById(R.id.button2);
-        b[3]=(Button) findViewById(R.id.button3);
-        b[4]=(Button) findViewById(R.id.button4);
-        b[5]=(Button) findViewById(R.id.button5);
-        b[6]=(Button) findViewById(R.id.button6);
-        next=(Button) findViewById(R.id.next);
-
-        for(int c=1;c<=6;c++)
-        {
-            b[c].setBackgroundResource(R.drawable.button);
-            b[c].setText("?");
-            b[c].setTextColor(Color.parseColor("#ffffff"));
+        for (int i=1;i<=6;i++){
+            if (i>3){
+                values[i]=i-3;
+            }
+            else {
+                values[i] = i;
+            }
         }
-        randomization();
-        //array store images
-        //2nd array, array of integer, index of the other array
-        //Assign listeners to each buttons
+        shufflearray(values);
 
+        Log.d(tag, "values1: " + values[1] + " values 5: " + values[5]);
+
+        b[1]=(ImageButton)findViewById(R.id.imageButton1);
+        b[2]=(ImageButton) findViewById(R.id.imageButton2);
+        b[3]=(ImageButton) findViewById(R.id.imageButton3);
+        b[4]=(ImageButton) findViewById(R.id.imageButton4);
+        b[5]=(ImageButton) findViewById(R.id.imageButton5);
+        b[6]=(ImageButton) findViewById(R.id.imageButton6);
+        next=(Button) findViewById(R.id.next);
+        next.setVisibility(View.INVISIBLE);
         b[1].setOnClickListener(new cln(1));
         b[2].setOnClickListener(new cln(2));
         b[3].setOnClickListener(new cln(3));
@@ -71,18 +68,52 @@ public class pair_level1 extends Activity {
         b[6].setOnClickListener(new cln(6));
         next.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+
             public void onClick(View v) {
+                Log.d(tag, "Inside Onclick of the Next Button");
+
                 Intent intent = new Intent(pair_level1.this, pair_level2.class);
                 startActivity(intent);
+                Log.d(tag, "Finished calling the intent - now finish() going to run");
                 finish();
 
 
             }
         });
 
+
     }
 
+/*    protected void onSaveInstanceState(Bundle outState)
+    {
+        //Save all the values required for the game
+        //Save the button states and any information displayed
+        super.onSaveInstanceState(outState);
+        Log.d(tag, "onSavedInstanceState");
+
+        outState.putInt("values1", values[1]);
+        outState.putInt("values1", values[5]);
+
+
+    }*/
+
+    public void shufflearray(int [] values){
+
+        //int n = values.length;
+        Random random = new Random();
+        random.nextInt();
+        for (int i = 1; i < 6; i++) {
+            int change = i + random.nextInt(6 - i);
+            swap(values, i, change);
+
+        }
+    }
+
+    private void swap(int[] a, int i, int change) {
+        int helper = a[i];
+        a[i] = a[change];
+        a[change] = helper;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,174 +121,153 @@ public class pair_level1 extends Activity {
         getMenuInflater().inflate(R.menu.menu_pair_level1, menu);
         return true;
     }
-
+    public void generateNoteOnSD(String sFileName, String sBody){
+        try
+        {
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            //importError = e.getMessage();
+            //iError();
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
-    public void randomization()
-    {
-        //Store 3 distinct integers in an array
-        //Use the above 3 values and insert them twice in a 6 slotted array
-        //The array with 6 numbers are each assigned to a number using their index
-        //Shuffle the 6 slot array so as each button is assigned randomly to an int
 
-
-        Random random= new Random();
-        for(int i=1; i<=3; i++)
-        {
-            int val=random.nextInt(100);
-            while(exists(val)) { val=random.nextInt(100) ;}
-            values[i]= val;
-        }
-        int valindex = 1;
-        for(int x=1;x<=6;x++)
-        {
-            if (valindex >3)
-            {
-                valindex=1;
-            }
-            but_val[x]= values[valindex];
-            String temp="";
-            temp="Button "+x+" has val = "+values[valindex];
-            System.out.println(temp);
-            valindex++;
-
-        }
-        shuffleArray(but_val);
-    }
-    public boolean exists(int v)
-    {
-        for(int i=1;i<7;i++)
-        {
-            if (values[i]==v) return true;
-        }
-        return false;
-    }
-    public class cln implements View.OnClickListener
-    {
-        int n;
-        int prev1;
+    public class cln implements View.OnClickListener{
+        int index;
         public cln(int button_index)
         {
-            n = button_index;
+            index = button_index;
         }
 
         @Override
         public void onClick(View v)
         {
 
-            b[n].setText(""+but_val[n]);
-
-            if (odd==0){
-                odd=1;
-            }
-            else if (odd==1){
-                odd=0;
-            }
-
-            if(clicked==-1)
-            {
-                b[n].setText(""+but_val[n]);
-                clicked=n;
-                display=n;
-                activecounter++;
-
-                prev=n;
+            if (first==0){
                 first=1;
-                //Log.d(tag, "Button Pressed ="+n + "value of button = "+ but_val[n]);
+                timestart=System.currentTimeMillis();
             }
-            else if (n!=clicked)
-            {
-                activecounter++;
-                b[n].setText(""+but_val[n]);
-
-                prev = clicked;
-                clicked = n;
-
-                if(but_val[prev] == but_val[n])
-                {
-
-
-                    b[prev].setEnabled(false);
-                    b[n].setEnabled(false);
-
-                    but_val[prev] = -1;
-                    but_val[n] = -1;
-
-                    solved++;
-                    if(solved==3) {
-                        ;}
-
-                    clicked=-1;
-                    prev= -1;
-
-                }
-                else
-                {
-                    display=n;
-
-                    if (odd==0){
-                        b[n].setText(""+but_val[n]);
-
-                        CountDownTimer timer= new CountDownTimer(3000, 1000) {
-
-                            public void onFinish() {
-                                b[prev].setText("?");
-                                b[n].setText("?");
-
-                            }
-
-
-                            String text="";
-                            public void onTick(long millisUntilFinished) {
-                                // TODO Auto-generated method stub
-                                text=text+ millisUntilFinished;
-
-                            }
-                        }.start();
-                        timer.start();
-
-                    }
-                    else{
-                        b[n].setText(""+but_val[n]);
-                        b[prev].setText("?");
-                    }
-
+            activecounter=activecounter+1;
+            if (activecounter==1){
+                cardsactive[0]=index;
+                int value=values[index];
+                switch (value){
+                    case 1 :
+                        b[index].setBackgroundResource(R.drawable.l1);
+                        Log.d(tag, "case1");
+                        break;
+                    case 2:
+                        b[index].setBackgroundResource(R.drawable.l2);
+                        Log.d(tag, "case2");
+                        break;
+                    case 3:
+                        b[index].setBackgroundResource(R.drawable.l3);
+                        Log.d(tag, "case3");
+                        break;
                 }
 
             }
+            else if (activecounter==2){
+                cardsactive[1]=index;
+                //disables all other cards
+                for (int j=1;j<=6;j++){
+                    if (j!=cardsactive[0] || j!=cardsactive[1]){
+                        b[j].setClickable(false);
+                    }
+                }
+
+                switch (values[index]){
+                    case 1 :
+                        b[index].setBackgroundResource(R.drawable.l1);
+                        Log.d(tag, "case1");
+                        break;
+                    case 2:
+                        b[index].setBackgroundResource(R.drawable.l2);
+                        Log.d(tag, "case1");
+                        break;
+
+                    case 3:
+                        b[index].setBackgroundResource(R.drawable.l3);
+                        break;
+
+                }
+                int value1=values [cardsactive[0]];
+                int value2=values [cardsactive[1]];
+                if (value1!=value2){
+                    CountDownTimer timer= new CountDownTimer(1500, 1000) {
+
+                        public void onFinish() {
+                            b[cardsactive[0]].setBackgroundResource(R.drawable.button);
+                            b[cardsactive[1]].setBackgroundResource(R.drawable.button);
+                            wrong = +1;
+                            for (int j = 1; j <= 6; j++) {
+
+                                b[j].setClickable(true);
+
+
+
+                            }
+
+                        }
+                        String text="";
+                        public void onTick(long millisUntilFinished) {
+                            // TODO Auto-generated method stub
+                            text=text+ millisUntilFinished;
+
+                        }
+                    }.start();
+                    timer.start();
+
+                }
+                else {
+                    correct=correct+1;
+                    for (int j = 1; j <= 6; j++) {
+                        if (j != cardsactive[0] || j != cardsactive[1]) {
+                            b[j].setClickable(true);
+                        }
+                    }
+                }
+                value1=0;
+                value2=0;
+                activecounter=0;
+            }
+            if (correct==3){
+                timefinish=System.currentTimeMillis();
+                long timetaken=(timefinish-timestart)/1000;
+                generateNoteOnSD("Results", "<xml><NumberofColums>3</NumberofColums><NumberofRows>2</NumberofRows><NumberofCorrect>"+correct+"</NumberofCorrect><NumberofIncorrect>"+wrong+"</NumberofIncorrect><Timetaken>"+timetaken+"</Timetaken></xml>");
+                next.setVisibility(View.VISIBLE);
+
+
+            }
+
         }
     }
-    //Shuffle the Values of any array of type int passed
-    //Swap integers function
-    public void shuffleArray(int[] a)
-    {
-        int n = a.length;
-        Random random = new Random();
-        random.nextInt();
-        for (int i = 1; i < n; i++) {
-            int change = i + random.nextInt(n - i);
-            swap(a, i, change);
-        }
-    }
-
-    public void pause() {
-        // TODO Auto-generated method stub
-
-
-
-
-
-
-    }
+<<<<<<< HEAD
     private void swap(int[] a, int i, int change) {
         int helper = a[i];
         a[i] = a[change];
@@ -268,4 +278,6 @@ public class pair_level1 extends Activity {
     public void onBackPressed() { // Disable hardware back button
     }
 
+=======
+>>>>>>> 197c26baae3bacdf36e3f4279b182ffc7b641ad7
 }
