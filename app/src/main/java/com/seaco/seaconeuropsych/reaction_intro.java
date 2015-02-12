@@ -1,9 +1,14 @@
 package com.seaco.seaconeuropsych;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class reaction_intro extends ActionBarActivity {
@@ -35,5 +40,34 @@ public class reaction_intro extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void nextActivity(View view) {
+        // when Next is clicked, start next activity
+        Intent intent = new Intent(this, reaction_main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+    public void skipActivity(View view) {
+        // when Next is clicked, start next activity
+        Intent intent = new Intent(this, prospective_end.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 }

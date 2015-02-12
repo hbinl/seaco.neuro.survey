@@ -47,7 +47,6 @@
     <string name="prospective_results_time_initial_final">Time elapsed since initial screen:\u0020</string>
     <string name="prospective_results_time_end_visible">Time the final screen was visible:\u0020</string>
     <string name="title_activity_prospective_result">prospective_result</string>
-
     <string name="pair_intro_title">PAIR MATCHING</string>
     <string name="pair_header_count">2 OF 4</string>
     <string name="pair_help_text">Open the cards and find their matches.</string>
@@ -62,21 +61,23 @@
     <string name="unable_try_button">I am unable to try this</string>
     <string name="try_next_time">Please try it next time. It is fun to play!</string>
     <string name="exit_button">Exit</string>
->                                    <string-array name="questionList">
-        <item>Add the following numbers together: 1 2 3 4 5 - is the answer?</item>
-        <item>Which number is the largest?</item>
-        <item>Bud is to flower as child is to?</item>
-        <item>11 12 13 14 15 16 17 18\n\nDivide the sixth number to the right of twelve by three. Is the answer?</item>
-        <item>If Truda\'s mother\'s brother is Tim\'s sister\'s father, what relation is Truda to Tim?</item>
-        <item>If sixty is more than half of seventy-five, multiply twenty-three by three. If not subtract 15 from eighty-five. Is the answer?</item>
-        <item>Stop means the same as?</item>
-        <item>If David is twenty-one and Owen is nineteen and Daniel is nine years younger than David, what is half their combined age?</item>
-        <item>Age is to years as height is to?</item>
-        <item>150…137…125…114…104…\n\nWhat comes next?</item>
-        <item>Relaxed means the opposite of?</item>
-        <item>100…99…95…86…70…\n\nWhat comes next?</item>
-        <item>If some flinks are plinks and some plinks are stinks then some flinks are definitely stinks?</item>
-    </string-array>
+    <string name="fluid_header">FLUID INTELLIGENCE</string>
+    <string name="fluid_header_count">3 OF 4</string>
+    >                                        <string-array name="questionList">
+    <item>Add the following numbers together: 1 2 3 4 5 - is the answer?</item>
+    <item>Which number is the largest?</item>
+    <item>Bud is to flower as child is to?</item>
+    <item>11 12 13 14 15 16 17 18\n\nDivide the sixth number to the right of twelve by three. Is the answer?</item>
+    <item>If Truda\'s mother\'s brother is Tim\'s sister\'s father, what relation is Truda to Tim?</item>
+    <item>If sixty is more than half of seventy-five, multiply twenty-three by three. If not subtract 15 from eighty-five. Is the answer?</item>
+    <item>Stop means the same as?</item>
+    <item>If David is twenty-one and Owen is nineteen and Daniel is nine years younger than David, what is half their combined age?</item>
+    <item>Age is to years as height is to?</item>
+    <item>150…137…125…114…104…\n\nWhat comes next?</item>
+    <item>Relaxed means the opposite of?</item>
+    <item>100…99…95…86…70…\n\nWhat comes next?</item>
+    <item>If some flinks are plinks and some plinks are stinks then some flinks are definitely stinks?</item>
+</string-array>
     <string-array name="button1List">
         <item>13</item>
         <item>642</item>
@@ -168,6 +169,13 @@
         <item>\0</item>
     </string-array>
 
+    <string name="reaction_header">REACTION TIME</string>
+    <string name="reaction_header_count">4 OF 4</string>
+    <string name="reaction_intro_desc">In this game, you will be shown patterns.
+Press match when Remember blablablablabla
+When you\'re ready, press
+START GAME button</string>
+
     <string name="do_not_know">Do not know</string>
     <string name="not_answer">Prefer not to answer</string>
     <string name="title_activity_reaction_main">reaction_main</string>
@@ -218,5 +226,6 @@
     <string name="window15">Fifteenth window</string>
     <string name="window16">Sixteenth window</string>
     <string name="title_activity_pair_intro">pair_intro</string>
+    <string name="title_activity_reaction_intro">reaction_intro</string>
 
 </resources>

@@ -9,41 +9,7 @@
 
     tools:context="com.example.reactiontime.MainActivity" >
 
-    <FrameLayout
-        android:id="@+id/frameLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_marginLeft="32dp" >
-    </FrameLayout>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/frameLayout1"
-        android:layout_toRightOf="@+id/editText2"
-         />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="62dp"
-        android:scaleType="fitCenter"
-         />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="32dp"
-        android:text="Match" />
 
     <TextView
         android:id="@+id/textView1"
@@ -51,16 +17,67 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="55dp"
+        android:layout_gravity="center"
         android:text="Click on the &apos;Match&apos; button when the two pictures below match" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/imageView2"
+        android:gravity="center_horizontal"
         android:layout_centerVertical="true"
-        android:text="Start" />
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="40dp"
+        android:id="@+id/cards_rl">
+
+
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:src="@drawable/blue_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:src="@drawable/blue_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toRightOf="@+id/imageView1"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_below="@id/cards_rl">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_blue_res"
+            android:text="Match" />
+
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_green_res"
+
+            android:text="Start" />
+        </RelativeLayout>
+
+
 
     <EditText
         android:id="@+id/editText2"
@@ -68,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="10dp"
         android:ems="10" />
 
     <TextView
@@ -76,18 +93,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/button2"
-        android:layout_marginTop="52dp"
-        android:text="Reaction Time :" />
+        android:layout_below="@+id/cards_rl"
+        android:layout_marginTop="100dp"
+        android:text="Reaction Time :"
+        android:layout_centerHorizontal="true"/>
+
+
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button_pink_res"
+        android:text="Skip"
         android:id="@+id/button14"
         android:onClick="endActivity"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
+
+
 
 </RelativeLayout>

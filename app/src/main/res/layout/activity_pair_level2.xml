@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="30dp"
             android:layout_height="10dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.4"
 
             android:background="#ff2e30fb"/>
     </LinearLayout>

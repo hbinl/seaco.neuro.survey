@@ -52,6 +52,16 @@ public class pair_intro extends ActionBarActivity {
         overridePendingTransition(0, 0);
     }
 
+    public void skipActivity(View view) {
+        // when Next is clicked, start next activity
+        Intent intent = new Intent(this, fluid_main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
     @Override
     public void onBackPressed() { // Disable hardware back button
     }

@@ -240,8 +240,11 @@ public class fluid_main extends Activity implements View.OnClickListener{
         button3.setVisibility(View.VISIBLE);
         button3.setText(R.string.exit_button);
 
-        Intent intent = new Intent(fluid_main.this, reaction_main.class);
+        Intent intent = new Intent(fluid_main.this, reaction_intro.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     // Change millisUntilFinished to time format 00:00:00
