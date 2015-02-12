@@ -5,12 +5,15 @@ import java.util.Arrays;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Lights_main extends Activity implements View.OnClickListener {
     /**
@@ -193,5 +196,10 @@ public class Lights_main extends Activity implements View.OnClickListener {
 
     @Override
     public void onBackPressed() { // Disable hardware back button
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 }

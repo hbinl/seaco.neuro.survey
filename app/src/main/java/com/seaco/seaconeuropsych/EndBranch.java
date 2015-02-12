@@ -1,11 +1,14 @@
 package com.seaco.seaconeuropsych;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EndBranch extends ActionBarActivity {
@@ -60,5 +63,14 @@ public class EndBranch extends ActionBarActivity {
 
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 }

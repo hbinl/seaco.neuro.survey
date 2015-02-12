@@ -36,4 +36,8 @@ public class EndActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
+    }
 }

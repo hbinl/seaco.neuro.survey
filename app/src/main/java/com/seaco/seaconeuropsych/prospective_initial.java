@@ -4,6 +4,7 @@ package com.seaco.seaconeuropsych;
 //here again
 //lol
 //haobin'sfsdjhfkhkfhfakhfkahfkljalhflahdkfldjkfjkdj
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class prospective_initial extends ActionBarActivity {
@@ -81,6 +84,11 @@ public class prospective_initial extends ActionBarActivity {
 
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_prospective_initial, menu);
@@ -101,10 +109,18 @@ public class prospective_initial extends ActionBarActivity {
 
     public void nextActivity(View view) {
         // when Next is clicked, start next activity
-        Intent intent = new Intent(this, pair_level1.class);
-
+        Intent intent = new Intent(this, pair_intro.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.putExtra("Answer", shape);
         startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }
-//HAHA
+

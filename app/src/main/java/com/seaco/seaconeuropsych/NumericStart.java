@@ -10,6 +10,7 @@ import android.view.View;
 
 public class NumericStart extends ActionBarActivity {
     public static long start_time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,13 @@ public class NumericStart extends ActionBarActivity {
         intent.putExtra("roundNo",1);
         intent.putExtra("numCorrectSoFar",0);
         intent.putExtra("numErrors",0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
 
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }

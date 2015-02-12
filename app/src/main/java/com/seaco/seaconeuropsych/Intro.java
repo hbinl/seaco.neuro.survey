@@ -7,17 +7,37 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class Intro extends ActionBarActivity {
     final Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Remove title bar
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+
+        //set content view AFTER ABOVE sequence (to avoid crash)
+        this.setContentView(R.layout.activity_intro);
+
+
 
     }
 
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,8 +64,13 @@ public class Intro extends ActionBarActivity {
     public void endActivity(View view) {
         // when OK button is clicked, proceed
         Intent intent = new Intent(context, prospective_initial.class);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
+        overridePendingTransition(0, 0);
 
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }

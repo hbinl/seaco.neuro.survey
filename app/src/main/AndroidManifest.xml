@@ -3,13 +3,17 @@
     package="com.seaco.seaconeuropsych" >
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.seaco.seaconeuropsych.Intro"
-            android:label="@string/app_name" >
+            android:name=".Intro"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,60 +21,100 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.prospective_initial"
-            android:label="@string/title_activity_prospective_initial" >
+            android:name=".prospective_initial"
+            android:label="@string/title_activity_prospective_initial"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.prospective_end"
-            android:label="@string/title_activity_prospective_end" >
+            android:name=".pair_intro"
+            android:label="@string/title_activity_pair_intro"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.prospective_result"
-            android:label="@string/title_activity_prospective_result" >
+            android:name=".prospective_end"
+            android:label="@string/title_activity_prospective_end"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.pair_level1"
-            android:label="@string/title_activity_pair_level1" >
+            android:name=".prospective_result"
+            android:label="@string/title_activity_prospective_result"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.pair_level2"
-            android:label="@string/title_activity_pair_level2" >
+            android:name=".pair_level1"
+            android:label="@string/title_activity_pair_level1"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.fluid_main"
-            android:label="@string/title_activity_fluid_main" >
+            android:name=".pair_level2"
+            android:label="@string/title_activity_pair_level2"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.reaction_main"
-            android:label="@string/title_activity_reaction_main" >
+            android:name=".fluid_main"
+            android:label="@string/title_activity_fluid_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.NumericStart"
-            android:label="@string/title_activity_numeric_start" >
+            android:name=".reaction_main"
+            android:label="@string/title_activity_reaction_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.NumericMainActivity"
-            android:label="@string/title_activity_numeric_main" >
+            android:name=".NumericStart"
+            android:label="@string/title_activity_numeric_start"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.NumericMainInput"
-            android:label="@string/title_activity_numeric_main_input" >
+            android:name=".NumericMainActivity"
+            android:label="@string/title_activity_numeric_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.NumericEndReport"
-            android:label="@string/title_activity_numeric_end_report" >
+            android:name=".NumericMainInput"
+            android:label="@string/title_activity_numeric_main_input"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.EndBranch"
-            android:label="@string/title_activity_end_branch" >
+            android:name=".NumericEndReport"
+            android:label="@string/title_activity_numeric_end_report"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.EndActivity"
-            android:label="@string/title_activity_end" >
+            android:name=".EndBranch"
+            android:label="@string/title_activity_end_branch"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
         </activity>
         <activity
-            android:name="com.seaco.seaconeuropsych.Lights_main"
-            android:label="@string/title_activity_lights_main" >
+            android:name=".EndActivity"
+            android:label="@string/title_activity_end"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+        </activity>
+        <activity
+            android:name=".Lights_main"
+            android:label="@string/title_activity_lights_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+        </activity>
+        <activity
+            android:name=".reaction_intro"
+            android:label="@string/title_activity_reaction_intro"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
         </activity>
     </application>
 

@@ -58,6 +58,7 @@ public class NumericEndReport extends ActionBarActivity {
         // placeholder for linking to another test game
         Intent intent = new Intent(this, EndBranch.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -80,5 +81,9 @@ public class NumericEndReport extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() { // Disable hardware back button
     }
 }
