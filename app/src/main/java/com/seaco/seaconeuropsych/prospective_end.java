@@ -85,16 +85,16 @@ public class prospective_end extends Activity {
 
         // Setting images
         final ImageView img1 = (ImageView) findViewById(R.id.imageView_1);
-        img1.setImageResource(R.drawable.octagon_red);
+        img1.setImageResource(R.drawable.octagon_red_2);
 
         final ImageView img2= (ImageView) findViewById(R.id.imageView_2);
-        img2.setImageResource(R.drawable.circle_orange);
+        img2.setImageResource(R.drawable.circle_orange_2);
 
         final ImageView img3= (ImageView) findViewById(R.id.imageView_3);
-        img3.setImageResource(R.drawable.square_blue);
+        img3.setImageResource(R.drawable.square_blue_2);
 
         final ImageView img4= (ImageView) findViewById(R.id.imageView_4);
-        img4.setImageResource(R.drawable.triangle_green);
+        img4.setImageResource(R.drawable.triangle_green_2);
 
         // and setting up onClick events
 

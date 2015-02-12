@@ -10,9 +10,10 @@
         coloured shapes and ask you to touch a shape.
         %1$s However, to test your memory, we want you to actually
         touch the %2$s instead.</string>
+    <string name="prospective_header_final">FINAL</string>
     <string name="prospective_header">PROSPECTIVE MEMORY TEST</string>
     <string name="prospective_header_count">1 OF 4</string>
-    <string name="prospective_end_text">Now touch the %s and click Next.</string>
+    <string name="prospective_end_text">Remember your first task? Now tap on %s.</string>
     <string name="prospective_end_skip_text">Skip</string>
     <string name="shape1">Red Octagon</string>
     <string name="shape2">Orange Circle</string>
