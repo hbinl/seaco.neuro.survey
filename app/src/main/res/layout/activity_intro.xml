@@ -8,50 +8,30 @@
     android:clipToPadding="false"
     >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/intro_button"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/main_logo"
+       />
 
-        android:layout_marginRight="-160dp"
-        android:layout_marginLeft="-10dp"
-        android:clipToPadding="false"
-        android:id="@+id/main_bg_rl"
-        android:gravity="center_vertical">
+    <Button
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:background="@drawable/button_pink_res"
+        android:layout_width="190dp"
+        android:layout_height="70dp"
+        android:text="START"
+        android:textSize="25dp"
+        android:textColor="@android:color/white"
+        android:id="@+id/intro_button"
+        android:onClick="endActivity"
 
-
-            android:id="@+id/main_bg_imageView"
-            android:src="@drawable/main_bg_box"
-
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:clipToPadding="false"
-            android:layout_gravity="center"/>
+        android:layout_gravity="center_horizontal"
 
 
-        <Button
-            android:layout_width="190dp"
-            android:layout_height="70dp"
-            android:text="START"
-            android:id="@+id/button"
-            android:onClick="endActivity"
-            android:gravity="center|center_horizontal|fill_vertical"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="71dp"
-
-            android:layout_marginBottom="209dp"
-            android:layout_marginStart="71dp"
-            android:layout_alignBottom="@+id/main_bg_imageView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-    </RelativeLayout>
-
+        android:layout_centerInParent="true" />
 
 
 
@@ -59,8 +39,9 @@
 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="-30dp"
+        android:layout_marginBottom="-70dp"
         android:layout_alignParentBottom="true">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,5 +85,7 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>
