@@ -1,6 +1,7 @@
 package com.seaco.seaconeuropsych;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -8,6 +9,8 @@ import android.view.Gravity;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class fluid_main extends Activity implements View.OnClickListener{
     /**
@@ -253,5 +256,10 @@ public class fluid_main extends Activity implements View.OnClickListener{
     // Prevent using back button in phone
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 }

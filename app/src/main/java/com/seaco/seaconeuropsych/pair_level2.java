@@ -3,6 +3,7 @@ package com.seaco.seaconeuropsych;
 import java.util.Random;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class pair_level2 extends Activity {
     public String tag = "gme";
@@ -168,8 +171,8 @@ public class pair_level2 extends Activity {
                     CountDownTimer timer= new CountDownTimer(1500, 1000) {
 
                         public void onFinish() {
-                            b[cardsactive[0]].setBackgroundResource(R.drawable.button);
-                            b[cardsactive[1]].setBackgroundResource(R.drawable.button);
+                            b[cardsactive[0]].setBackgroundResource(R.drawable.blue_card);
+                            b[cardsactive[1]].setBackgroundResource(R.drawable.blue_card);
                             wrong=+1;
                             for (int j=1;j<=12;j++){
 
@@ -244,6 +247,11 @@ public class pair_level2 extends Activity {
 
     @Override
     public void onBackPressed() { // Disable hardware back button
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
 }

@@ -20,10 +20,10 @@
     <Button
 
         android:background="@drawable/button_pink_res"
-        android:layout_width="190dp"
-        android:layout_height="70dp"
-        android:text="START"
-        android:textSize="25dp"
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:text="@string/intro_button"
+        android:textSize="33dp"
         android:textColor="@android:color/white"
         android:id="@+id/intro_button"
         android:onClick="endActivity"
@@ -68,7 +68,7 @@
                     android:layout_width="fill_parent"
 
                     android:layout_height="wrap_content"
-                    android:text="Records"
+                    android:text="@string/intro_records_button"
                     android:id="@+id/button7"
 
                     />
@@ -78,7 +78,7 @@
                     android:layout_width="fill_parent"
 
                     android:layout_height="wrap_content"
-                    android:text="About"
+                    android:text="@string/intro_about_button"
                     android:id="@+id/button8"
                     />
             </RelativeLayout>
