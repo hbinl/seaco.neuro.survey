@@ -104,7 +104,7 @@ public class prospective_end extends Activity {
                     // if this imageView is clicked, show a selection highlight and unset other highlights
                     // also set id to this selection
                     id = 1;
-                    img1.setBackgroundColor(Color.rgb(150, 150, 150));
+                    img1.setBackgroundColor(Color.rgb(183, 225, 247));
                     img2.setBackgroundColor(0x00000000);
                     img3.setBackgroundColor(0x00000000);
                     img4.setBackgroundColor(0x00000000);
@@ -118,7 +118,7 @@ public class prospective_end extends Activity {
             public void onClick(View v) {
                 if (v.equals(img2)) {
                     id = 2;
-                    img2.setBackgroundColor(Color.rgb(150,150,150));
+                    img2.setBackgroundColor(Color.rgb(183, 225, 247));
                     img1.setBackgroundColor(0x00000000);
                     img3.setBackgroundColor(0x00000000);
                     img4.setBackgroundColor(0x00000000);
@@ -133,7 +133,7 @@ public class prospective_end extends Activity {
             public void onClick(View v) {
                 if (v.equals(img3)) {
                     id = 3;
-                    img3.setBackgroundColor(Color.rgb(150,150,150));
+                    img3.setBackgroundColor(Color.rgb(183, 225, 247));
                     img2.setBackgroundColor(0x00000000);
                     img1.setBackgroundColor(0x00000000);
                     img4.setBackgroundColor(0x00000000);
@@ -148,7 +148,7 @@ public class prospective_end extends Activity {
             public void onClick(View v) {
                 if (v.equals(img4)) {
                     id = 4;
-                    img4.setBackgroundColor(Color.rgb(150,150,150));
+                    img4.setBackgroundColor(Color.rgb(183, 225, 247));
                     img2.setBackgroundColor(0x00000000);
                     img3.setBackgroundColor(0x00000000);
                     img1.setBackgroundColor(0x00000000);

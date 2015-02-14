@@ -64,6 +64,15 @@
     <string name="exit_button">Exit</string>
     <string name="fluid_header">FLUID INTELLIGENCE</string>
     <string name="fluid_header_count">3 OF 4</string>
+
+    <string name="end_branch_message">You have just completed \nthe first part of the survey. \n\nPlease contact your advisor \nfor further action.</string>
+    <string name="end_branch_button_numeric">Numeric Memory Test</string>
+    <string name="end_branch_button_lights">Lights Pattern Test</string>
+    <string name="end_branch_button_save">Save and End the Survey</string>
+
+
+
+
     >                                        <string-array name="questionList">
     <item>Add the following numbers together: 1 2 3 4 5 - is the answer?</item>
     <item>Which number is the largest?</item>

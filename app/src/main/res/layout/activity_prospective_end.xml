@@ -61,7 +61,7 @@
                 android:layout_height="150dp"
                 android:id="@+id/imageView_1"
                 android:layout_gravity="top|center"
-                android:background="@drawable/octagon_red_2"
+
                 />
 
             <ImageView
@@ -69,7 +69,7 @@
                 android:layout_height="150dp"
                 android:id="@+id/imageView_2"
                 android:layout_gravity="top|center"
-                android:background="@drawable/triangle_green_2"
+
 
                 android:layout_toRightOf="@+id/imageView_1"/>
         </RelativeLayout>
@@ -86,7 +86,7 @@
                 android:layout_height="150dp"
                 android:id="@+id/imageView_3"
                 android:layout_gravity="top|center"
-                android:background="@drawable/circle_orange_2"
+
 
                 />
 
@@ -95,7 +95,7 @@
                 android:layout_height="150dp"
                 android:id="@+id/imageView_4"
                 android:layout_gravity="top|center"
-                android:background="@drawable/square_blue_2"
+
 
 
                 android:layout_toRightOf="@+id/imageView_3"/>
