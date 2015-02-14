@@ -8,7 +8,6 @@ import java.util.Random;
 import android.content.Context;
 import android.content.Intent;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -31,12 +30,8 @@ public class pair_level1 extends Activity {
     int first =0;
     int correct=0;
     int wrong=0;
-    int display=-1;							//button currently activeious button
-    int prev=-1;								// keep tract of prev
-    int clicked=-1;
-    int solved=0;							//keep tract of the total number of pairs obtained so far
-    int odd=0;
-    long timestart;
+ 	int clicked=-1;
+     long timestart;
     long timefinish;
     Button next;
     @Override

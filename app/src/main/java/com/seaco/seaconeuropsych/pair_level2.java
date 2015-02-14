@@ -1,19 +1,22 @@
 package com.seaco.seaconeuropsych;
 
 import java.util.Random;
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -26,12 +29,15 @@ public class pair_level2 extends Activity {
     public Button end;
     int correct=0;
     int wrong=0;
+    long timestart;
+    long timefinish;
+    int first=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_pair_level2);
-        Log.d(tag, "value casekoushalpetitcon 2: ");
+
 
         for (int i=1;i<=12;i++){
             if (i>6){
@@ -89,6 +95,27 @@ public class pair_level2 extends Activity {
         a[i] = a[change];
         a[change] = helper;
     }
+    public void generateNoteOnSD(String sFileName, String sBody){
+        try
+        {
+            File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            //importError = e.getMessage();
+            //iError();
+        }
+    }
     public class cln implements View.OnClickListener{
         int index;
         public cln(int button_index)
@@ -99,6 +126,10 @@ public class pair_level2 extends Activity {
         @Override
         public void onClick(View v)
         {
+            if (first==0){
+                first=1;
+                timestart=System.currentTimeMillis();
+            }
 
             Log.d(tag, "values index: " + values[index]);
             activecounter=activecounter+1;
@@ -201,7 +232,7 @@ public class pair_level2 extends Activity {
                         }
                     }
                 }
-                
+
                 activecounter=0;
             }
             /*for (int j=1;j<=12;j++){
@@ -210,6 +241,10 @@ public class pair_level2 extends Activity {
                 }
             }*/
             if (correct==6){
+                timefinish=System.currentTimeMillis();
+                long timetaken=(timefinish-timestart)/1000;
+                generateNoteOnSD("Results1", "<xml><NumberofColums>3</NumberofColums><NumberofRows>4</NumberofRows><NumberofCorrect>" + correct + "</NumberofCorrect><NumberofIncorrect>" + wrong + "</NumberofIncorrect><Timetaken>" + timetaken + "</Timetaken></xml>");
+
                 end.setVisibility(View.VISIBLE);
 
             }
