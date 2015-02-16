@@ -4,8 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
 
-    <dimen name="start_x">30dp</dimen>
-    <dimen name="start_y">150dp</dimen>
-    <dimen name="space_x">60dp</dimen>
-    <dimen name="space_y">60dp</dimen>
+    <dimen name="start_x">10dp</dimen>
+    <dimen name="start_y">50dp</dimen>
+    <dimen name="space_x">90dp</dimen>
+    <dimen name="space_y">100dp</dimen>
 </resources>

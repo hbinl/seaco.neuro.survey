@@ -114,7 +114,14 @@
             android:name=".reaction_intro"
             android:label="@string/title_activity_reaction_intro"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >
+        </activity>
+
+        <activity
+            android:name=".LightsIntro"
+            android:label="@string/title_activity_lights_intro"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" >>
         </activity>
     </application>
 

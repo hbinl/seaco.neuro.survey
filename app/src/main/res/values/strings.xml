@@ -193,6 +193,8 @@ START GAME button</string>
     <string name="numeric_intro">In this game, you will be shown a number to remember. \n\nThe number will disappear after 3 seconds, and then you have to enter the number
     into the number pad on screen. \nThe number will become longer each time you remember correctly.\n\nThe first number will be 2 digits long. \nWhen you\'re ready, press
      NEXT button.</string>
+    <string name="numeric_helptext">Try to remember the number above.</string>
+    <string name="numeric_title">NUMERIC MEMORY</string>
     <string name="button_next">Next</string>
     <string name="button_skip">Skip</string>
     <string name="button_confirm">OK</string>
@@ -217,7 +219,7 @@ START GAME button</string>
     <string name="title_activity_end_branch">EndBranch</string>
     <string name="title_activity_end">EndActivity</string>
     <string name="title_activity_lights_main">Lights_main</string>
-    <string name="lights_start_message">In the next section, you will be shown a picture of a small house, like the one below. Some of the lights are switched on. Remember which windows are lit up.\n\nPress "Next" when you are ready to start.</string>
+    <string name="lights_start_message">In the next section, you will be shown a picture of a small house, like the one below. Some of the lights are switched on. Remember which windows are lit up.</string>
     <string name="instruction">Please touch the windows that had the lights on. When you have pressed all the windows that you need to, press "Next".</string>
     <string name="window1">First window</string>
     <string name="window2">Second window</string>
@@ -237,5 +239,8 @@ START GAME button</string>
     <string name="window16">Sixteenth window</string>
     <string name="title_activity_pair_intro">pair_intro</string>
     <string name="title_activity_reaction_intro">reaction_intro</string>
+    <string name="seaco">SEACO</string>
+    <string name="title_activity_lights_intro">LightsIntro</string>
+    <string name="lights_title">LIGHTS PATTERN</string>
 
 </resources>

@@ -15,6 +15,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 public class NumericMainInput extends ActionBarActivity {
     private Context context = this;
@@ -178,5 +180,10 @@ public class NumericMainInput extends ActionBarActivity {
 
     @Override
     public void onBackPressed() { // Disable hardware back button
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 }

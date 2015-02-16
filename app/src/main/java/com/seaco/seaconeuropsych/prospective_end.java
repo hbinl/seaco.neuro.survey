@@ -311,7 +311,7 @@ public class prospective_end extends Activity {
                     }
 
 
-                    Intent intent = new Intent(context, prospective_result.class);
+                    Intent intent = new Intent(context, EndBranch.class);
                     intent.putExtra("1_Prospective_Actual_Answer", actual_answer);
                     intent.putExtra("1_Prospective_Final_Answer", prospective_end.id);
                     intent.putExtra("1_Prospective_Correct", correct);

@@ -11,26 +11,19 @@ import android.view.View;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
-public class NumericStart extends ActionBarActivity {
-    public static long start_time;
+public class LightsIntro extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_numeric_start);
-
-        //initialise start timer
-        start_time = System.currentTimeMillis();
+        setContentView(R.layout.activity_pair_intro);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_numeric_start, menu);
+        getMenuInflater().inflate(R.menu.menu_pair_intro, menu);
         return true;
     }
 
@@ -49,13 +42,21 @@ public class NumericStart extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startNumeric(View view) {
-        // Let's go!
-        Intent intent = new Intent(this, NumericMainActivity.class);
-        intent.putExtra("roundNo",1);
-        intent.putExtra("numCorrectSoFar",0);
-        intent.putExtra("numErrors",0);
+    public void nextActivity(View view) {
+        // when Next is clicked, start next activity
+        Intent intent = new Intent(this, pair_level1.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0, 0);
+    }
+
+    public void skipActivity(View view) {
+        // when Next is clicked, start next activity
+        Intent intent = new Intent(this, fluid_main.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
         startActivity(intent);
         finish();
         overridePendingTransition(0, 0);

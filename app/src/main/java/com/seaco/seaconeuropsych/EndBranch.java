@@ -59,7 +59,7 @@ public class EndBranch extends ActionBarActivity {
 
     public void endActivity(View view) {
         // when OK button is clicked, proceed
-        Intent intent = new Intent(EndBranch.this, EndActivity.class);
+        Intent intent = new Intent(EndBranch.this, Intro.class);
 
         startActivity(intent);
 

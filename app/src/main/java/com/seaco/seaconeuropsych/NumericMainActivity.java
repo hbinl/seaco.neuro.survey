@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.Random;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class NumericMainActivity extends ActionBarActivity {
     final Context context = this;
     private long number;
@@ -158,5 +160,10 @@ public class NumericMainActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() { // Disable hardware back button
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 }
