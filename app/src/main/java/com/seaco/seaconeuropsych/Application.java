@@ -7,6 +7,6 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        CalligraphyConfig.initDefault("fonts/Avenir_Medium.ttf");
+        CalligraphyConfig.initDefault("fonts/Avenir_Medium.ttf"); //test
     }
 }
