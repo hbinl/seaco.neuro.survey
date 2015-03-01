@@ -1,5 +1,7 @@
 package com.seaco.seaconeuropsych;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Random;
 
 import android.content.Intent;
@@ -19,10 +21,9 @@ import android.widget.TextView;
 
 public class reaction_main extends ActionBarActivity {
     int count=0;
-    int counter=0;
-    long timestart;
+    long timestart=-1;
     long timefinish;
-    long []times=new long[13];
+    double []times=new double[13];
     Button match;
     Button start;
     @Override
@@ -46,25 +47,38 @@ public class reaction_main extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                timefinish=System.currentTimeMillis();
-                text.setVisibility(View.VISIBLE);
-                reaction.setVisibility(View.VISIBLE);
-                count++;
-                times[count]=(timefinish-timestart)/100;
+                timefinish = System.currentTimeMillis();
 
-                text.setText(String.valueOf(times[count])+" seconds!");
-                if (count==12){
-                    long sum=0;
-                    for (int j=3;j<=12;j++){
-                        sum=sum+times[j];
+                count++;
+                times[count] = (timefinish - timestart)/1000;
+                BigDecimal bde = new BigDecimal(times[count]);
+                bde = bde.round(new MathContext(3));
+                double time = bde.doubleValue();
+                if (timestart == -1) {
+                    reaction.setVisibility(View.INVISIBLE);
+                    text.setVisibility(View.INVISIBLE);
+                } else {
+                    text.setVisibility(View.VISIBLE);
+                    reaction.setVisibility(View.VISIBLE);
+                    text.setText(String.valueOf(time) + " seconds!");
+                    timestart = -1;
+                    if (count == 12) {
+                        double sum = 0;
+                        for (int j = 3; j <= 12; j++) {
+                            sum = sum + times[j];
+                        }
+                        double mean = sum / 10;
+                        BigDecimal bd = new BigDecimal(mean);
+                        bd = bd.round(new MathContext(3));
+                        double rounded = bd.doubleValue();
+                        text.setText("Average reaction time is : " + String.valueOf(rounded));
+                        match.setVisibility(View.INVISIBLE);
+
+                    } else {
+                        displayPictures();
                     }
-                    double mean=sum/10;
-                    text.setText("Average reaction time is : "+String.valueOf(mean));
-                    match.setVisibility(View.INVISIBLE);
-                    return;
-                }else{
-                    displayPictures();}
-                //return;
+
+                }
             }
         });
 
@@ -226,9 +240,7 @@ public class reaction_main extends ActionBarActivity {
 
     }
 
-    public int randBetween(int start, int end) {
-        return start + (int)Math.round(Math.random() * (end - start));
-    }
+
     public void randompic(){
         Random r=new Random();
         //obtain a random number between 1 and 12,  1 included
@@ -312,7 +324,6 @@ public class reaction_main extends ActionBarActivity {
                 break;
             }
         }
-        return;
 
     }
 
