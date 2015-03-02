@@ -48,8 +48,9 @@
     android:id="@+id/windowsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
     android:gravity="center"
-    android:layout_marginTop="150dp"
+    android:layout_marginTop="0dp"
     android:layout_marginStart="100dp"
     android:layout_marginLeft="100dp" >
 
@@ -89,7 +90,7 @@
         android:layout_alignTop="@+id/window02"
         android:layout_alignStart="@+id/window04"
         android:layout_alignLeft="@+id/window04"
-        android:layout_marginTop="@dimen/space_y"
+        android:layout_marginTop="150dp"
         android:layout_marginStart="@dimen/space_x"
         android:layout_marginLeft="@dimen/space_x"
         android:background="@null"
