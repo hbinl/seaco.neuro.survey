@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 public class reaction_main extends ActionBarActivity {
     int count=0;
+    int counter=0;
     long timestart=-1;
     long timefinish;
     double []times=new double[13];
@@ -46,10 +47,12 @@ public class reaction_main extends ActionBarActivity {
         match.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                counter++;
                 timefinish = System.currentTimeMillis();
 
-                count++;
+
                 times[count] = (timefinish - timestart)/1000;
                 BigDecimal bde = new BigDecimal(times[count]);
                 bde = bde.round(new MathContext(3));
@@ -58,6 +61,7 @@ public class reaction_main extends ActionBarActivity {
                     reaction.setVisibility(View.INVISIBLE);
                     text.setVisibility(View.INVISIBLE);
                 } else {
+                    count++;
                     text.setVisibility(View.VISIBLE);
                     reaction.setVisibility(View.VISIBLE);
                     text.setText(String.valueOf(time) + " seconds!");
