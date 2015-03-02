@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -112,6 +113,8 @@ public class Lights_main extends Activity implements View.OnClickListener {
                 int currentNoOfWindows = (int) Math.pow(step, 2); // Set current number of windows equal to step to the power of 2
                 if (step >= 2 && step < 5) { // Step 2 is for 4 windows, step 3 is for 9 windows and step 4 is for 16 windows
                     if (step > 2) { // Only start check answer after step 2
+                        RelativeLayout windowsLayout = (RelativeLayout) findViewById(R.id.windowsLayout);
+                        
                         if (Arrays.equals(combination, answer)) { // Return true if the combination is same as the answer, otherwise false
                             noOfCorrect++; // If condition is true, increase noOfCorrect by 1
                         } else {
