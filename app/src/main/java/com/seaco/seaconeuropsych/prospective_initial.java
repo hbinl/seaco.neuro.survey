@@ -36,7 +36,7 @@ public class prospective_initial extends ActionBarActivity {
     public static int shape;        //store shape for this session
     public static int fakeShape;    //the decoy shape for this session
     public static long start_time;  //start timer
-    public static String filename =  String.valueOf(System.currentTimeMillis());
+    public final static String filename =  String.valueOf(System.currentTimeMillis()) + ".xml";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

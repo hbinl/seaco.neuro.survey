@@ -2,11 +2,29 @@ package com.seaco.seaconeuropsych;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -51,6 +69,7 @@ public class NumericStart extends ActionBarActivity {
 
     public void startNumeric(View view) {
         // Let's go!
+        initXML();
         Intent intent = new Intent(this, NumericMainActivity.class);
         intent.putExtra("roundNo",1);
         intent.putExtra("numCorrectSoFar",0);
@@ -59,6 +78,45 @@ public class NumericStart extends ActionBarActivity {
         startActivity(intent);
         finish();
         overridePendingTransition(0, 0);
+    }
+
+
+    private void initXML() {
+
+        try {
+            System.out.println("Start");
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
+            File file = new File(filepath);
+            boolean fileCreated = file.createNewFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            //Document doc = docBuilder.newDocument();
+            Document doc = docBuilder.parse("file://" + filepath);
+
+            Node root = doc.getFirstChild();
+            Element roundX = doc.createElement("numericMemory");
+            root.appendChild(roundX);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+
+            System.out.println("Done");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (SAXException sae) {
+            sae.printStackTrace();
+        }
     }
 
     @Override

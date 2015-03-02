@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +16,23 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -60,6 +77,8 @@ public class NumericMainActivity extends ActionBarActivity {
         // Start timer
         numericMainTimer(round_no);
     }
+
+
 
     private void numericMainTimer(int round_no) {
         // Calculating the time allowance, as stated in the requirement
@@ -122,7 +141,9 @@ public class NumericMainActivity extends ActionBarActivity {
     private void numericMainGotoInput() {
         // Preparing to go to Input View
         // Passing data over
+        int duration_displayed = 2000 + ( (round_no + 1) * 500);
         Intent intent = new Intent(this, NumericMainInput.class);
+        intent.putExtra("durationDisplayed", duration_displayed);
         intent.putExtra("numberGeneratedForCurrentRound", number);
         intent.putExtra("roundNo", round_no);
         intent.putExtra("numberOfDigits", round_no+1);

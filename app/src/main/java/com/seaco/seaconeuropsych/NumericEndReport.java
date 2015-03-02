@@ -1,12 +1,30 @@
 package com.seaco.seaconeuropsych;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 
 public class NumericEndReport extends ActionBarActivity {
@@ -56,9 +74,54 @@ public class NumericEndReport extends ActionBarActivity {
 
     public void proceed(View view) {
         // placeholder for linking to another test game
+        writeXML();
         Intent intent = new Intent(this, EndBranch.class);
         startActivity(intent);
         finish();
+    }
+
+    private void writeXML() {
+
+        try {
+            System.out.println("Start");
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
+            File file = new File(filepath);
+            boolean fileCreated = file.createNewFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            //Document doc = docBuilder.newDocument();
+            Document doc = docBuilder.parse("file://" + filepath);
+
+            Node root = doc.getFirstChild();
+            Node numeric_tag = doc.getElementsByTagName("numericMemory").item(0);
+            Element isCompletedStoppedAbandoned = doc.createElement("isSkipped");
+            isCompletedStoppedAbandoned.appendChild(doc.createTextNode(String.valueOf(skipped)));
+            numeric_tag.appendChild(isCompletedStoppedAbandoned);
+
+            Element totalTimeTaken = doc.createElement("totalTimeTaken");
+            totalTimeTaken.appendChild(doc.createTextNode(String.valueOf(duration)));
+            numeric_tag.appendChild(totalTimeTaken);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+
+            System.out.println("Done");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (SAXException sae) {
+            sae.printStackTrace();
+        }
     }
 
     @Override

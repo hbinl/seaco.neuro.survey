@@ -57,6 +57,8 @@ public class EndBranch extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_branch);
+
+        writeXML();
     }
 
 
@@ -99,7 +101,7 @@ public class EndBranch extends ActionBarActivity {
 
     public void endActivity(View view) {
         // when OK button is clicked, proceed
-        writeXML();
+
         Intent intent = new Intent(EndBranch.this, Intro.class);
 
         startActivity(intent);
@@ -109,24 +111,16 @@ public class EndBranch extends ActionBarActivity {
     private void writeXML() {
         try {
             System.out.println("Start");
-            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             //Document doc = docBuilder.newDocument();
             Document doc = docBuilder.parse("file://" + filepath);
 
             Node root = doc.getFirstChild();
-            Node shape = doc.getElementsByTagName("shape").item(0);
-            Element finalAnswer = doc.createElement("finalAnswer");
-            finalAnswer.appendChild(doc.createTextNode("2"));
-            shape.appendChild(finalAnswer);
-
-            Node pair = doc.createElement("pair");
-            root.appendChild(pair);
-            Element noOfColumn = doc.createElement("noOfColumn");
-            pair.appendChild(noOfColumn);
-
-
+            Element stageOneCompleted = doc.createElement("stageOneCompleted");
+            stageOneCompleted.appendChild(doc.createTextNode("true"));
+            root.appendChild(stageOneCompleted);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
