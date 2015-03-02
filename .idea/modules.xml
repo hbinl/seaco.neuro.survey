@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SEACO_Neuropsych.iml" filepath="$PROJECT_DIR$/SEACO_Neuropsych.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Seaco_merged.iml" filepath="$PROJECT_DIR$/Seaco_merged.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
