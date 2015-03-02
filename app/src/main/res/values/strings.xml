@@ -13,7 +13,7 @@
     <string name="prospective_header_final">FINAL</string>
     <string name="prospective_header">PROSPECTIVE MEMORY TEST</string>
     <string name="prospective_header_count">1 OF 4</string>
-    <string name="prospective_end_text">Remember your first task? Now tap on %s.</string>
+    <string name="prospective_end_text">Remember your first task? Now tap on the shape we asked for.</string>
     <string name="prospective_end_skip_text">Skip</string>
     <string name="shape1">Red Octagon</string>
     <string name="shape2">Orange Circle</string>

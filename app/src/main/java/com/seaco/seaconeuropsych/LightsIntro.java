@@ -16,14 +16,14 @@ public class LightsIntro extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pair_intro);
+        setContentView(R.layout.activity_lights_intro);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_pair_intro, menu);
+        getMenuInflater().inflate(R.menu.menu_lights_intro, menu);
         return true;
     }
 
@@ -44,7 +44,7 @@ public class LightsIntro extends ActionBarActivity {
 
     public void nextActivity(View view) {
         // when Next is clicked, start next activity
-        Intent intent = new Intent(this, pair_level1.class);
+        Intent intent = new Intent(this, Lights_main.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivity(intent);
@@ -54,7 +54,7 @@ public class LightsIntro extends ActionBarActivity {
 
     public void skipActivity(View view) {
         // when Next is clicked, start next activity
-        Intent intent = new Intent(this, fluid_main.class);
+        Intent intent = new Intent(this, EndBranch.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         startActivity(intent);

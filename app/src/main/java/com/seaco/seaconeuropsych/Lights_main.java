@@ -56,6 +56,8 @@ public class Lights_main extends Activity implements View.OnClickListener {
         windows.add(initiateWindow(R.id.window15));
         windows.add(initiateWindow(R.id.window16));
 
+
+
         message = (TextView) findViewById(R.id.message); // Initiate text view for message
         message.setText(R.string.lights_start_message); // Print start_message
 

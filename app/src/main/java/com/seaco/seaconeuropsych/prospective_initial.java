@@ -1,11 +1,8 @@
 package com.seaco.seaconeuropsych;
-//trial
-//soomadee's 
-//here again
-//lol
-//haobin'sfsdjhfkhkfhfakhfkahfkljalhflahdkfldjkfjkdj
+
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -16,7 +13,21 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -25,6 +36,7 @@ public class prospective_initial extends ActionBarActivity {
     public static int shape;        //store shape for this session
     public static int fakeShape;    //the decoy shape for this session
     public static long start_time;  //start timer
+    public static String filename =  String.valueOf(System.currentTimeMillis());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,15 +121,54 @@ public class prospective_initial extends ActionBarActivity {
 
     public void nextActivity(View view) {
         // when Next is clicked, start next activity
+        writeXML();
         Intent intent = new Intent(this, pair_intro.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        intent.putExtra("Answer", shape);
+        //intent.putExtra("Answer", shape);
         startActivity(intent);
         finish();
         overridePendingTransition(0, 0);
     }
 
+    private void writeXML() {
 
+        try {
+            System.out.println("Start");
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + filename;
+            File file = new File(filepath);
+            boolean fileCreated = file.createNewFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+            //Document doc = docBuilder.parse("file://" + filepath);
+
+            Element root = doc.createElement("seaco");
+            doc.appendChild(root);
+            Element shape_tag = doc.createElement("shape");
+            root.appendChild(shape_tag);
+            Element initialAnswer = doc.createElement("initialAnswer");
+            shape_tag.appendChild(initialAnswer);
+            initialAnswer.appendChild(doc.createTextNode(String.valueOf(shape)));
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+
+            System.out.println("Done");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
 
     @Override
     public void onBackPressed() { // Disable hardware back button

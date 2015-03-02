@@ -2,11 +2,51 @@ package com.seaco.seaconeuropsych;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -51,7 +91,7 @@ public class EndBranch extends ActionBarActivity {
     }
     public void yesContinue6(View view) {
         // when OK button is clicked, proceed
-        Intent intent = new Intent(EndBranch.this, Lights_main.class);
+        Intent intent = new Intent(EndBranch.this, LightsIntro.class);
 
         startActivity(intent);
 
@@ -59,9 +99,56 @@ public class EndBranch extends ActionBarActivity {
 
     public void endActivity(View view) {
         // when OK button is clicked, proceed
+        writeXML();
         Intent intent = new Intent(EndBranch.this, Intro.class);
 
         startActivity(intent);
+
+    }
+
+    private void writeXML() {
+        try {
+            System.out.println("Start");
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            //Document doc = docBuilder.newDocument();
+            Document doc = docBuilder.parse("file://" + filepath);
+
+            Node root = doc.getFirstChild();
+            Node shape = doc.getElementsByTagName("shape").item(0);
+            Element finalAnswer = doc.createElement("finalAnswer");
+            finalAnswer.appendChild(doc.createTextNode("2"));
+            shape.appendChild(finalAnswer);
+
+            Node pair = doc.createElement("pair");
+            root.appendChild(pair);
+            Element noOfColumn = doc.createElement("noOfColumn");
+            pair.appendChild(noOfColumn);
+
+
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+
+            System.out.println("Done");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (SAXException ioe) {
+            ioe.printStackTrace();
+        }
+
+
 
     }
 

@@ -24,6 +24,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import java.io.File;
+import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 
 public class prospective_end extends Activity {
     final Context context = this;               // for context purposes
@@ -73,7 +90,7 @@ public class prospective_end extends Activity {
 
         //set up textview to display the Decoy shape prompt
         TextView textview = (TextView)findViewById(R.id.prospective_end_text);
-        textview.setText(getString(R.string.prospective_end_text, shapeName));
+        textview.setText(getString(R.string.prospective_end_text));
 
 
         //Intent intent = getIntent();
@@ -264,51 +281,9 @@ public class prospective_end extends Activity {
                 // User clicked OK button
                 // if answer is correct or skipped, proceed to next activity
                 if (proceed) {
+                    System.out.println("Ddde");
                     // passing data for reports
-
-                    final String xmlFile = "userData";
-                    String userName = "username";
-                    String password = "password";
-                    try {
-                        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "X" + "/", "userData.xml");
-                        FileOutputStream fileos = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "X" + "/" + "userData.xml");
-                        System.out.println("S");
-                        //FileOutputStream fileos= getApplicationContext().openFileOutput(xmlFile, Context.MODE_PRIVATE);
-                        XmlSerializer xmlSerializer = Xml.newSerializer();
-                        StringWriter writer = new StringWriter();
-                        xmlSerializer.setOutput(writer);
-                        xmlSerializer.startDocument("UTF-8", true);
-                        xmlSerializer.startTag(null, "userData");
-                        xmlSerializer.startTag(null, "userName");
-                        xmlSerializer.text("x");
-                        xmlSerializer.endTag(null, "userName");
-                        xmlSerializer.startTag(null,"password");
-                        xmlSerializer.text("s");
-                        xmlSerializer.endTag(null, "password");
-                        xmlSerializer.endTag(null, "userData");
-                        xmlSerializer.endDocument();
-                        xmlSerializer.flush();
-                        String dataWrite = writer.toString();
-                        fileos.write(dataWrite.getBytes());
-                        fileos.close();
-
-                    }
-                    catch (FileNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    catch (IllegalArgumentException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    catch (IllegalStateException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    writeXML();
 
 
                     Intent intent = new Intent(context, EndBranch.class);
@@ -329,6 +304,69 @@ public class prospective_end extends Activity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    private void writeXML() {
+
+        try {
+            System.out.println("Start");
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
+            File file = new File(filepath);
+            boolean fileCreated = file.createNewFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            //Document doc = docBuilder.newDocument();
+            Document doc = docBuilder.parse("file://" + filepath);
+
+            Node root = doc.getFirstChild();
+            Node shape_tag = doc.getElementsByTagName("shape").item(0);
+            Element finalAnswer = doc.createElement("finalAnswer");
+            finalAnswer.appendChild(doc.createTextNode(String.valueOf(prospective_end.id)));
+            shape_tag.appendChild(finalAnswer);
+
+            Element isCorrect = doc.createElement("isCorrect");
+            isCorrect.appendChild(doc.createTextNode(String.valueOf(correct)));
+            shape_tag.appendChild(isCorrect);
+
+            Element historyOfAttempt = doc.createElement("historyOfAttempt");
+            historyOfAttempt.appendChild(doc.createTextNode(String.valueOf(prev_id)));
+            shape_tag.appendChild(historyOfAttempt);
+
+            Element noOfAttempt = doc.createElement("noOfAttempt");
+            noOfAttempt.appendChild(doc.createTextNode(String.valueOf(attempts)));
+            shape_tag.appendChild(noOfAttempt);
+
+            Element timePromptAndDisplayingAnswer = doc.createElement("timePromptAndDisplayingAnswer");
+            timePromptAndDisplayingAnswer.appendChild(doc.createTextNode(String.valueOf(duration)));
+            shape_tag.appendChild(timePromptAndDisplayingAnswer);
+
+            Element timeScreenVisible = doc.createElement("timeScreenVisible");
+            timeScreenVisible.appendChild(doc.createTextNode(String.valueOf(visible_duration)));
+            shape_tag.appendChild(timeScreenVisible);
+
+
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+
+            System.out.println("Done");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (SAXException sae) {
+            sae.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onBackPressed() { // Disable hardware back button
