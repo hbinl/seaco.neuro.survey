@@ -12,6 +12,7 @@ import android.widget.TextView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.File;
@@ -102,6 +103,44 @@ public class NumericEndReport extends ActionBarActivity {
             Element totalTimeTaken = doc.createElement("totalTimeTaken");
             totalTimeTaken.appendChild(doc.createTextNode(String.valueOf(duration)));
             numeric_tag.appendChild(totalTimeTaken);
+
+            long currentMax = 0;
+            long current = 0;
+            boolean correct = false;
+
+            NodeList round_tags_list = numeric_tag.getChildNodes();
+            for (int i=0; i < round_tags_list.getLength(); i++ ) {
+                Node node = round_tags_list.item(i);
+
+                if ("round".equals(node.getNodeName())) {
+                    NodeList sublist = node.getChildNodes();
+
+                    for (int j=0; j < sublist.getLength(); j++) {
+                        Node subnode = sublist.item(j);
+
+                        if ("noOfDigits".equals(subnode.getNodeName())) {
+                            //System.out.println(subnode.getTextContent());
+                            current = Long.parseLong(subnode.getTextContent(),10);
+                        }
+
+                        if ("isCorrectInEachRound".equals(subnode.getNodeName())) {
+                            //System.out.println("X");
+                            //System.out.println(subnode.getTextContent());
+                            correct = Boolean.parseBoolean(subnode.getTextContent());
+                        }
+                    }
+
+                    if (current > currentMax && correct) {
+                        //System.out.println(currentMax);
+                        currentMax = current;
+                    }
+                }
+            }
+
+            Element maxNoOfDigitRemembered = doc.createElement("maxNoOfDigitRemembered");
+            maxNoOfDigitRemembered.appendChild(doc.createTextNode(String.valueOf(currentMax)));
+            numeric_tag.appendChild(maxNoOfDigitRemembered);
+
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,6 +49,10 @@ public class NumericMainInput extends ActionBarActivity {
     private boolean skipped;
     private int duration_displayed;
     private static long keyboardFirstAppearTime;
+    private long start_time = System.currentTimeMillis();
+    private long time_first_char_entered = 0;
+    private long time_last_char_entered = 0;
+    private int char_inputted = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,27 @@ public class NumericMainInput extends ActionBarActivity {
                     checkAnswer(findViewById(R.id.submit_button));
                 }
                 return false;
+            }
+        });
+
+        textInput.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if (char_inputted == 0) {
+                    time_first_char_entered = System.currentTimeMillis() - start_time;
+                } else {
+                    time_last_char_entered = System.currentTimeMillis() - start_time;
+                }
+                char_inputted++;
+
             }
         });
 
@@ -187,11 +214,11 @@ public class NumericMainInput extends ActionBarActivity {
             roundX.appendChild(timeTakenDisplayingNumber);
 
             Element timeFirstEnteredDigit = doc.createElement("timeFirstEnteredDigit");
-            timeFirstEnteredDigit.appendChild(doc.createTextNode(String.valueOf(duration_displayed)));
+            timeFirstEnteredDigit.appendChild(doc.createTextNode(String.valueOf(time_first_char_entered)));
             roundX.appendChild(timeFirstEnteredDigit);
 
             Element timeLastEnteredDigit = doc.createElement("timeLastEnteredDigit");
-            timeLastEnteredDigit.appendChild(doc.createTextNode(String.valueOf(duration_displayed)));
+            timeLastEnteredDigit.appendChild(doc.createTextNode(String.valueOf(time_last_char_entered)));
             roundX.appendChild(timeLastEnteredDigit);
 
             Element timeFromInstantKeyboardActivated = doc.createElement("timeFromInstantKeyboardActivated");
