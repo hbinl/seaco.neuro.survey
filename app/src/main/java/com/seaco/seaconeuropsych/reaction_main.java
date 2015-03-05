@@ -272,7 +272,7 @@ public class reaction_main extends ActionBarActivity {
                 //start counter for the number of seconds
                 timestart=System.currentTimeMillis();
                try{
-                String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+                String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
                 File file= new File(filepath);
                 boolean fileCreated = file.createNewFile();
 

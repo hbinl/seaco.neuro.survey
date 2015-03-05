@@ -271,7 +271,7 @@ public class pair_level1 extends Activity {
                 long timetaken = (timefinish - timestart) / 1000;
                 try {
                     //generateNoteOnSD("Results", "<xml><NumberofColums>3</NumberofColums><NumberofRows>2</NumberofRows><NumberofCorrect>"+correct+"</NumberofCorrect><NumberofIncorrect>"+wrong+"</NumberofIncorrect><Timetaken>"+timetaken+"</Timetaken></xml>");
-                    String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+                    String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
                     File file= new File(filepath);
                     boolean fileCreated = file.createNewFile();
 
@@ -279,15 +279,18 @@ public class pair_level1 extends Activity {
                     DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
                     Document doc = docBuilder.parse("file://"+filepath);
                     //Node root=doc.getFirstChild();
-                    Node pairlevel1_tag= doc.getElementsByTagName("pairLevel1").item(0);
+
+                    Node xroot = doc.getFirstChild();
+
                     Element root = doc.createElement("pairlevel1");
+                    //Node pairlevel1_tag= doc.getElementsByTagName("pairLevel1").item(0);
                     //doc.appendChild(root);
                     Element columns = doc.createElement("noofcolumns");
                     root.appendChild(columns);
                     columns.appendChild(doc.createTextNode("3"));
                     Element rows = doc.createElement("noofrows");
                     root.appendChild(rows);
-                    rows.appendChild(doc.createElement("2"));
+                    rows.appendChild(doc.createTextNode("2"));
                     Element ncorrect=doc.createElement("NumberofCorrect");
                     root.appendChild(ncorrect);
                     ncorrect.appendChild(doc.createTextNode(String.valueOf(correct)));
@@ -298,6 +301,9 @@ public class pair_level1 extends Activity {
                     root.appendChild(time);
                     time.appendChild(doc.createTextNode(String.valueOf(timetaken)));
                     // write the content into xml file
+
+                    xroot.appendChild(root);
+
 
 
                     TransformerFactory transformerFactory = TransformerFactory.newInstance();

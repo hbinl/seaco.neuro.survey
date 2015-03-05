@@ -258,14 +258,15 @@ public class pair_level2 extends Activity {
                 timefinish=System.currentTimeMillis();
                 long timetaken=(timefinish-timestart)/1000;
                try{
-                String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+                String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
                 File file= new File(filepath);
                 boolean fileCreated = file.createNewFile();
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
                 Document doc = docBuilder.parse("file://"+filepath);
-                //Node root=doc.getFirstChild();
-                Node pairlevel1_tag= doc.getElementsByTagName("pairLevel2").item(0);
+
+                Node xroot=doc.getFirstChild();
+                //Node pairlevel1_tag= doc.getElementsByTagName("pairLevel2").item(0);
                 Element root = doc.createElement("pairlevel2");
                 //doc.appendChild(root);
                 Element columns = doc.createElement("noofcolumns");
@@ -273,7 +274,7 @@ public class pair_level2 extends Activity {
                 columns.appendChild(doc.createTextNode("3"));
                 Element rows = doc.createElement("noofrows");
                 root.appendChild(rows);
-                rows.appendChild(doc.createElement("4"));
+                rows.appendChild(doc.createTextNode("4"));
                 Element ncorrect=doc.createElement("NumberofCorrect");
                 root.appendChild(ncorrect);
                 ncorrect.appendChild(doc.createTextNode(String.valueOf(correct)));
@@ -284,6 +285,7 @@ public class pair_level2 extends Activity {
                 root.appendChild(time);
                 time.appendChild(doc.createTextNode(String.valueOf(timetaken)));
                 // write the content into xml file
+                 xroot.appendChild(root);
 
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
