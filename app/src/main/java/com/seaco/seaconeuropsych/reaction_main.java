@@ -279,7 +279,7 @@ public class reaction_main extends ActionBarActivity {
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
                 Document doc = docBuilder.parse("file://"+filepath);
-                //Node root=doc.getFirstChild();
+                Node xroot=doc.getFirstChild();
                 Node pairlevel1_tag= doc.getElementsByTagName("reaction").item(0);
                 Element root = doc.createElement("reaction");
                 //doc.appendChild(root);
@@ -302,7 +302,7 @@ public class reaction_main extends ActionBarActivity {
                 root.appendChild(meanTime);
                 meanTime.appendChild(doc.createTextNode(String.valueOf(rounded)));
                 // write the content into xml file
-
+                xroot.appendChild(root);
 
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
