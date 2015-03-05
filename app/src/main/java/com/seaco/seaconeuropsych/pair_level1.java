@@ -19,6 +19,20 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class pair_level1 extends Activity {
@@ -163,19 +177,18 @@ public class pair_level1 extends Activity {
         }
 
         @Override
-        public void onClick(View v)
-        {
+        public void onClick(View v) {
 
-            if (first==0){
-                first=1;
-                timestart=System.currentTimeMillis();
+            if (first == 0) {
+                first = 1;
+                timestart = System.currentTimeMillis();
             }
-            activecounter=activecounter+1;
-            if (activecounter==1){
-                cardsactive[0]=index;
-                int value=values[index];
-                switch (value){
-                    case 1 :
+            activecounter = activecounter + 1;
+            if (activecounter == 1) {
+                cardsactive[0] = index;
+                int value = values[index];
+                switch (value) {
+                    case 1:
                         b[index].setBackgroundResource(R.drawable.l1);
                         Log.d(tag, "case1");
                         break;
@@ -189,18 +202,17 @@ public class pair_level1 extends Activity {
                         break;
                 }
 
-            }
-            else if (activecounter==2){
-                cardsactive[1]=index;
+            } else if (activecounter == 2) {
+                cardsactive[1] = index;
                 //disables all other cards
-                for (int j=1;j<=6;j++){
-                    if (j!=cardsactive[0] || j!=cardsactive[1]){
+                for (int j = 1; j <= 6; j++) {
+                    if (j != cardsactive[0] || j != cardsactive[1]) {
                         b[j].setClickable(false);
                     }
                 }
 
-                switch (values[index]){
-                    case 1 :
+                switch (values[index]) {
+                    case 1:
                         b[index].setBackgroundResource(R.drawable.l1);
                         Log.d(tag, "case1");
                         break;
@@ -214,10 +226,10 @@ public class pair_level1 extends Activity {
                         break;
 
                 }
-                int value1=values [cardsactive[0]];
-                int value2=values [cardsactive[1]];
-                if (value1!=value2){
-                    CountDownTimer timer= new CountDownTimer(1500, 1000) {
+                int value1 = values[cardsactive[0]];
+                int value2 = values[cardsactive[1]];
+                if (value1 != value2) {
+                    CountDownTimer timer = new CountDownTimer(1500, 1000) {
 
                         public void onFinish() {
                             b[cardsactive[0]].setBackgroundResource(R.drawable.blue_card);
@@ -228,36 +240,83 @@ public class pair_level1 extends Activity {
                                 b[j].setClickable(true);
 
 
-
                             }
 
                         }
-                        String text="";
+
+                        String text = "";
+
                         public void onTick(long millisUntilFinished) {
                             // TODO Auto-generated method stub
-                            text=text+ millisUntilFinished;
+                            text = text + millisUntilFinished;
 
                         }
                     }.start();
                     timer.start();
 
-                }
-                else {
-                    correct=correct+1;
+                } else {
+                    correct = correct + 1;
                     for (int j = 1; j <= 6; j++) {
                         if (j != cardsactive[0] || j != cardsactive[1]) {
                             b[j].setClickable(true);
                         }
                     }
                 }
-                value1=0;
-                value2=0;
-                activecounter=0;
+                value1 = 0;
+                value2 = 0;
+                activecounter = 0;
             }
-            if (correct==3){
-                timefinish=System.currentTimeMillis();
-                long timetaken=(timefinish-timestart)/1000;
-                generateNoteOnSD("Results", "<xml><NumberofColums>3</NumberofColums><NumberofRows>2</NumberofRows><NumberofCorrect>"+correct+"</NumberofCorrect><NumberofIncorrect>"+wrong+"</NumberofIncorrect><Timetaken>"+timetaken+"</Timetaken></xml>");
+            if (correct == 3) {
+                timefinish = System.currentTimeMillis();
+                long timetaken = (timefinish - timestart) / 1000;
+                try {
+                    //generateNoteOnSD("Results", "<xml><NumberofColums>3</NumberofColums><NumberofRows>2</NumberofRows><NumberofCorrect>"+correct+"</NumberofCorrect><NumberofIncorrect>"+wrong+"</NumberofIncorrect><Timetaken>"+timetaken+"</Timetaken></xml>");
+                    String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+                    File file= new File(filepath);
+                    boolean fileCreated = file.createNewFile();
+
+                    DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+                    Document doc = docBuilder.parse("file://"+filepath);
+                    //Node root=doc.getFirstChild();
+                    Node pairlevel1_tag= doc.getElementsByTagName("pairLevel1").item(0);
+                    Element root = doc.createElement("pairlevel1");
+                    //doc.appendChild(root);
+                    Element columns = doc.createElement("noofcolumns");
+                    root.appendChild(columns);
+                    columns.appendChild(doc.createTextNode("3"));
+                    Element rows = doc.createElement("noofrows");
+                    root.appendChild(rows);
+                    rows.appendChild(doc.createElement("2"));
+                    Element ncorrect=doc.createElement("NumberofCorrect");
+                    root.appendChild(ncorrect);
+                    ncorrect.appendChild(doc.createTextNode(String.valueOf(correct)));
+                    Element nwrong=doc.createElement("NumberofIncorrect");
+                    root.appendChild(nwrong);
+                    nwrong.appendChild(doc.createTextNode(String.valueOf(wrong)));
+                    Element time=doc.createElement("TimeTaken");
+                    root.appendChild(time);
+                    time.appendChild(doc.createTextNode(String.valueOf(timetaken)));
+                    // write the content into xml file
+
+
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(doc);
+                    StreamResult result = new StreamResult(new File(filepath));
+                    StreamResult resultx = new StreamResult(System.out);
+                    transformer.transform(source, result);
+                    transformer.transform(source, resultx);
+                } catch (ParserConfigurationException pce) {
+                    pce.printStackTrace();
+                } catch (TransformerException tfe) {
+                    tfe.printStackTrace();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                } catch (SAXException sae) {
+                    sae.printStackTrace();
+                }
+
                 next.setVisibility(View.VISIBLE);
 
 

@@ -18,6 +18,20 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class pair_level2 extends Activity {
@@ -243,7 +257,52 @@ public class pair_level2 extends Activity {
             if (correct==6){
                 timefinish=System.currentTimeMillis();
                 long timetaken=(timefinish-timestart)/1000;
-                generateNoteOnSD("Results1", "<xml><NumberofColums>3</NumberofColums><NumberofRows>4</NumberofRows><NumberofCorrect>" + correct + "</NumberofCorrect><NumberofIncorrect>" + wrong + "</NumberofIncorrect><Timetaken>" + timetaken + "</Timetaken></xml>");
+               try{
+                String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + "userData.xml";
+                File file= new File(filepath);
+                boolean fileCreated = file.createNewFile();
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+                Document doc = docBuilder.parse("file://"+filepath);
+                //Node root=doc.getFirstChild();
+                Node pairlevel1_tag= doc.getElementsByTagName("pairLevel2").item(0);
+                Element root = doc.createElement("pairlevel2");
+                //doc.appendChild(root);
+                Element columns = doc.createElement("noofcolumns");
+                root.appendChild(columns);
+                columns.appendChild(doc.createTextNode("3"));
+                Element rows = doc.createElement("noofrows");
+                root.appendChild(rows);
+                rows.appendChild(doc.createElement("4"));
+                Element ncorrect=doc.createElement("NumberofCorrect");
+                root.appendChild(ncorrect);
+                ncorrect.appendChild(doc.createTextNode(String.valueOf(correct)));
+                Element nwrong=doc.createElement("NumberofIncorrect");
+                root.appendChild(nwrong);
+                nwrong.appendChild(doc.createTextNode(String.valueOf(wrong)));
+                Element time=doc.createElement("TimeTaken");
+                root.appendChild(time);
+                time.appendChild(doc.createTextNode(String.valueOf(timetaken)));
+                // write the content into xml file
+
+
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File(filepath));
+                StreamResult resultx = new StreamResult(System.out);
+                transformer.transform(source, result);
+                transformer.transform(source, resultx);
+
+            } catch (ParserConfigurationException pce) {
+                 pce.printStackTrace();
+            } catch (TransformerException tfe) {
+                 tfe.printStackTrace();
+            } catch (IOException ioe) {
+                 ioe.printStackTrace();
+            } catch (SAXException sae) {
+                 sae.printStackTrace();
+            }
 
                 end.setVisibility(View.VISIBLE);
 
