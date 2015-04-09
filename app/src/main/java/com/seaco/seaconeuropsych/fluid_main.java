@@ -5,10 +5,28 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.TextView;
 import android.view.View;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -236,6 +254,7 @@ public class fluid_main extends Activity implements View.OnClickListener{
         } else {
             textViewMessage.setText(R.string.try_next_time);
         }
+        storeDataInTree();
         // Make exit_button appeared
         button3.setVisibility(View.VISIBLE);
         button3.setText(R.string.exit_button);
@@ -245,6 +264,65 @@ public class fluid_main extends Activity implements View.OnClickListener{
         startActivity(intent);
         finish();
         overridePendingTransition(0, 0);
+    }
+
+    public void storeDataInTree() {
+        try{
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
+            File file= new File(filepath);
+            boolean fileCreated = file.createNewFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse("file://" + filepath);
+
+            Node xroot = doc.getFirstChild();
+
+            Element root = doc.createElement("fluid_main");
+
+            Element time = doc.createElement("timeLeft");
+            root.appendChild(time);
+            time.appendChild(doc.createTextNode(timeFormat(timeLeft)));
+
+            Element questions = doc.createElement("questionNum");
+            root.appendChild(questions);
+            questions.appendChild(doc.createTextNode(String.valueOf(questionNum)));
+
+            Element correct = doc.createElement("correctNum");
+            root.appendChild(correct);
+            correct.appendChild(doc.createTextNode(String.valueOf(correctNum)));
+
+            Element wrong = doc.createElement("wrongNum");
+            root.appendChild(wrong);
+            wrong.appendChild(doc.createTextNode(String.valueOf(wrongNum)));
+
+            Element dontKnow = doc.createElement("doNotKnowNum");
+            root.appendChild(dontKnow);
+            dontKnow.appendChild(doc.createTextNode(String.valueOf(doNotKnowNum)));
+
+            Element notAnswer = doc.createElement("notAnswerNum");
+            root.appendChild(notAnswer);
+            notAnswer.appendChild(doc.createTextNode(String.valueOf(notAnswerNum)));
+
+            // write the content into xml file
+            xroot.appendChild(root);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (SAXException sae) {
+            sae.printStackTrace();
+        }
     }
 
     // Change millisUntilFinished to time format 00:00:00
