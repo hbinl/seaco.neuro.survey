@@ -1,5 +1,7 @@
 package com.seaco.seaconeuropsych;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -8,11 +10,25 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -56,8 +72,6 @@ public class Lights_main extends Activity implements View.OnClickListener {
         windows.add(initiateWindow(R.id.window14));
         windows.add(initiateWindow(R.id.window15));
         windows.add(initiateWindow(R.id.window16));
-
-
 
         message = (TextView) findViewById(R.id.message); // Initiate text view for message
         message.setText(R.string.lights_start_message); // Print start_message
@@ -145,6 +159,7 @@ public class Lights_main extends Activity implements View.OnClickListener {
 
     private void endActivity(int noOfCorrect, int noOfWrong) { // End activity
         message.setText("Finish\nNumber of correct: " + noOfCorrect + "\nNumber of wrong: " + noOfWrong); // Print result
+        storeDataInTree();
         for (int i = 0; i < windows.size(); i++) { // Set all windows disappeared
             windows.get(i).setVisibility(View.GONE);
         }
@@ -187,6 +202,48 @@ public class Lights_main extends Activity implements View.OnClickListener {
         theWindow.setClickable(false); // Set theWindow clickable
         theWindow.setVisibility(View.GONE); // Set theWindow to disappear
         return theWindow; // Return theWindow
+    }
+
+    public void storeDataInTree() {
+        try{
+            String filepath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "SEACO" + "/" + prospective_initial.filename;
+            File file= new File(filepath);
+            boolean fileCreated = file.createNewFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.parse("file://" + filepath);
+
+            Node xroot = doc.getFirstChild();
+
+            Element root = doc.createElement("Lights_main");
+
+            Element correct = doc.createElement("noOfCorrect");
+            root.appendChild(correct);
+            correct.appendChild(doc.createTextNode(String.valueOf(noOfCorrect)));
+
+            Element wrong = doc.createElement("noOfWrong");
+            root.appendChild(wrong);
+            wrong.appendChild(doc.createTextNode(String.valueOf(noOfWrong)));
+            // write the content into xml file
+            xroot.appendChild(root);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filepath));
+            StreamResult resultx = new StreamResult(System.out);
+            transformer.transform(source, result);
+            transformer.transform(source, resultx);
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch (SAXException sae) {
+            sae.printStackTrace();
+        }
     }
 
     private static String timeFormat(long millisUntilFinished) { // Change millisUntilFinished to time format hh:mm:ss
