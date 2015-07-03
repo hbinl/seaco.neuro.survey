@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">SEACO Neuropsych</string>
+    <string name="about_app">SEACO Neuropsych Version %1$s, developed by SSPIT</string>
     <string name="intro_button">START</string>
     <string name="intro_records_button">Records</string>
     <string name="intro_about_button">About</string>

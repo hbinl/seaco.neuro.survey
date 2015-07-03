@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.seaco.seaconeuropsych" >
-
+    package="com.seaco.seaconeuropsych" android:versionCode="1" android:versionName="1.00">
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <application
         android:name=".Application"
         android:allowBackup="true"

@@ -70,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/intro_about_button"
                     android:id="@+id/button8"
+                    android:onClick="onAboutClicked"
                     />
             </RelativeLayout>
         </LinearLayout>

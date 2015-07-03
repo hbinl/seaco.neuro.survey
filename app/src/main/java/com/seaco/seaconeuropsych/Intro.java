@@ -1,7 +1,9 @@
 package com.seaco.seaconeuropsych;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -72,5 +74,19 @@ public class Intro extends ActionBarActivity {
 
     @Override
     public void onBackPressed() { // Disable hardware back button
+    }
+
+    public void onAboutClicked(View view) {
+        int versionCode;
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        try {
+            versionCode = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            versionCode = 0;
+        }
+        builder.setMessage(getResources().getString(R.string.about_app, Integer.toString(versionCode)));
+        builder.setPositiveButton(R.string.confirm_button, null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
