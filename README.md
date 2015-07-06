@@ -14,6 +14,9 @@ Android Target SDK: 4.1 (API 16)
 
 Target Device Size: 7" tablet
 
+IDE: Android Studio/IntelliJ
+
+VCS Client: SourceTree, with Bitbucket
 
 **Games**
 
