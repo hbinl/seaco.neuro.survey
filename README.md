@@ -2,7 +2,7 @@
 
 Documented Spec - Updated 6th July 2015 5:30pm
 
-Developed by SSPIT
+Developed by SSPIT students: Loh Hao Bin, Soomadee, Chong Lee Zhen
 
 *****
 
